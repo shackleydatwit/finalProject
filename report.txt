@@ -1,0 +1,5 @@
+Score: 84
+
+heuristic h1 crashes in tests on small1, all other paths have LR sequences in them, which can't possibly be optimal. It looks like you are printing every expanded node rather than just the nodes on the optimal path
+
+splitting the different parts into different source files is a good idea. You might consider a different design where node functions are grouped together. You have similar code for node expansions in several places, for example

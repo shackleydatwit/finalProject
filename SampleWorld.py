@@ -18,6 +18,10 @@ def main():
     if len(arguments) == 3:
         alg = str(arguments[1])
         heuristic = str(arguments[2])
+    elif len(arguments) == 4:
+        alg = str(arguments[1])
+        heuristic = str(arguments[2])
+        weight = int(arguments[3])
     else:
         if len(arguments) == 1:
             print('Please input an algorthm to implement with the sample world')
@@ -60,7 +64,11 @@ def main():
         uniformCostSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, children)
         return 0
     elif alg == "astar":
-        aStarSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, heuristic)
+        aStarSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, heuristic, None)
         return 0
+    elif alg == "astarWeight":
+        aStarWeightSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, heuristic, weight)
+    elif alg == "greedy":
+        greedySearch(robotLocation, sampleLocations, blockedLocations, columns, rows, heuristic, None)
     return 0
 main()

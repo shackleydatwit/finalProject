@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+import time
 
 generated = 0
 expanded = 0
@@ -7,6 +8,7 @@ openLists = []
 hashList = []
 
 def depthFirstSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, children): 
+    tic = time.perf_counter()
     global openLists, hashList, generated, expanded
     openLists.append(robotLocation)
     notFoundAll = True
@@ -53,11 +55,14 @@ def depthFirstSearch(robotLocation, sampleLocations, blockedLocations, columns, 
                 openLists=temp
             else:
                 notFoundAll = False
+    toc = time.perf_counter()
+    print(f"Runtime: {toc - tic:0.4f} seconds")
     print(generated, 'nodes generated', '\n',expanded, 'nodes expanded')
     return 0
 
 
 def iterativeDeepeningSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, children): 
+    tic = time.perf_counter()
     global openLists, hashList, generated, expanded
     openLists.append(robotLocation)
     notFoundAll = True
@@ -113,5 +118,7 @@ def iterativeDeepeningSearch(robotLocation, sampleLocations, blockedLocations, c
                 openLists = depthList
                 depthList = []
                 levelDepth += 1
+    toc = time.perf_counter()
+    print(f"Runtime: {toc - tic:0.4f} seconds")
     print(generated, 'nodes generated', '\n',expanded, 'nodes expanded')
     return 0

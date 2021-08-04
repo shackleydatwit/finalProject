@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 import heapq
+import time
 
 generated = 0
 expanded = 0
@@ -9,6 +10,7 @@ hashList = []
 
 #For this search method you mentioned in the assignment that 'open lists are held in heaps for fast insertion' so I used a heap here vs a list
 def uniformCostSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, children): 
+    tic = time.perf_counter()
     global openLists, hashList, generated, expanded
     pathcost = 0
     heapq.heappush(openLists, (pathcost, robotLocation))
@@ -52,5 +54,7 @@ def uniformCostSearch(robotLocation, sampleLocations, blockedLocations, columns,
                         print('D')
             else:
                 notFoundAll = False
+    toc = time.perf_counter()
+    print(f"Runtime: {toc - tic:0.4f} seconds")
     print(generated, 'nodes generated', '\n',expanded, 'nodes expanded')
     return 0;

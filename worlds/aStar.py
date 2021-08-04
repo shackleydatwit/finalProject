@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import sys
 import heapq
+import time
 
 generated = 0
 expanded = 0
@@ -8,6 +9,7 @@ openLists = []
 hashList = []
 
 def aStarSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, herustic, weight):
+    tic = time.perf_counter()
     global openLists, hashList, generated, expanded
     pathcost = 0
     totalCost = herusticValue(sampleLocations, herustic, robotLocation, weight) + pathcost
@@ -57,9 +59,12 @@ def aStarSearch(robotLocation, sampleLocations, blockedLocations, columns, rows,
                         print('D')
             else:
                 notFoundAll = False
+    toc = time.perf_counter()
+    print(f"Runtime: {toc - tic:0.4f} seconds")
     print(generated, 'nodes generated', '\n',expanded, 'nodes expanded')
 
 def aStarWeightSearch(robotLocation, sampleLocations, blockedLocations, columns, rows, herustic, weight):
+    tic = time.perf_counter()
     global openLists, hashList, generated, expanded
     pathcost = 0
     totalCost = herusticValue(sampleLocations, herustic, robotLocation, weight) + pathcost
@@ -109,9 +114,12 @@ def aStarWeightSearch(robotLocation, sampleLocations, blockedLocations, columns,
                         print('D')
             else:
                 notFoundAll = False
+    toc = time.perf_counter()
+    print(f"Runtime: {toc - tic:0.4f} seconds")
     print(generated, 'nodes generated', '\n',expanded, 'nodes expanded')
 
 def greedySearch(robotLocation, sampleLocations, blockedLocations, columns, rows, herustic, weight):
+    tic = time.perf_counter()
     global openLists, hashList, generated, expanded
     totalCost = herusticValue(sampleLocations, herustic, robotLocation, weight)
     heapq.heappush(openLists, (totalCost, robotLocation, sampleLocations))
@@ -159,6 +167,8 @@ def greedySearch(robotLocation, sampleLocations, blockedLocations, columns, rows
                         print('D')
             else:
                 notFoundAll = False
+    toc = time.perf_counter()
+    print(f"Runtime: {toc - tic:0.4f} seconds")
     print(generated, 'nodes generated', '\n',expanded, 'nodes expanded')
 
 #Heuristic Values calcuated with given input from the user when aStar method is selected
